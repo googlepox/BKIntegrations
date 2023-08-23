@@ -4,12 +4,12 @@ using TaleWorlds.CampaignSystem;
 
 namespace BKCEKPatch.Patches.Faiths
 {
-    [HarmonyPatch(typeof(CanticlesFaith), "IsHeroNaturalFaith")]
+    [HarmonyPatch(typeof(CanticlesFaith), "IsCultureNaturalFaith")]
     internal class CanticlesPatch
     {
-        public static void Postfix(ref bool __result, Hero hero)
+        public static void Postfix(ref bool __result, CultureObject culture)
         {
-            if ((hero.Culture.StringId == "vlandia"))
+            if (culture.StringId == "vlandia" || culture.StringId == "rhodok")
             {
                 __result = true;
             }
