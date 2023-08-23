@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Settlements;
 
-namespace BKCEKPatch.Patches.Religion
+namespace BKCEKPatch.Patches.Religions
 {
     [HarmonyPatch(typeof(BannerKings.Managers.Institutions.Religions.Religion), "Initialize")]
     internal class ReligionPatch

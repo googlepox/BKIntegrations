@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
-    <BaseOutputPath>C:\Users\brand\Desktop\Dev\BL Mods\BKCEKPatch2\BKCEKPatch\BKCEKPatch\bin</BaseOutputPath>
+    <BaseOutputPath>C:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\BKCEKPatch\bin\Win64_Shipping_Client</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

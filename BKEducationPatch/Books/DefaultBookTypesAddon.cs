@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
+using TaleWorlds.SaveSystem;
 
 namespace BKEducationPatch.Books
 {
     internal class DefaultBookTypesAddOn : DefaultTypeInitializer<DefaultBookTypesAddOn, BookType>
     {
+        [SaveableField(1)]
+        internal static Dictionary<BookType, Language> bookTypeLanguages;
         public BookType LTBook1 { get; private set; } = new BookType("education_book_onehanded1");
         public BookType LTBook2 { get; private set; } = new BookType("education_book_twohanded1");
         public BookType LTBook3 { get; private set; } = new BookType("education_book_polearm1");
@@ -181,8 +184,31 @@ namespace BKEducationPatch.Books
         {
             foreach (BookType book in All)
             {
+                Language bookLanguage;
+                if (bookTypeLanguages != null && bookTypeLanguages.Count > 0 && bookTypeLanguages.ContainsKey(book))
+                {
+                    bookLanguage = bookTypeLanguages[book];
+                    if (bookLanguage.StringId == "language_vakken")
+                    {
+                        bookLanguage = DefaultLanguages.Instance.Vlandic;
+                    }
+                    bookTypeLanguages[book] = bookLanguage;
+                }
+                else
+                {
+                    bookTypeLanguages = new Dictionary<BookType, Language>();
+                    bookLanguage = GetRandLanguage();
+                    if (bookLanguage.StringId == "language_vakken")
+                    {
+                        while (bookLanguage.StringId == "language_vakken")
+                        {
+                            bookLanguage = GetRandLanguage();
+                        }
+                    }
+                    bookTypeLanguages.Add(book, bookLanguage);
+                }
                 ItemObject bookToAdd = MBObjectManager.Instance.GetObject<ItemObject>(book.StringId);
-                book.Initialize(bookToAdd, bookToAdd.Name, GetRandLanguage(), BookUse.Skillbook, GetSkillObject(bookToAdd.StringId));
+                book.Initialize(bookToAdd, bookToAdd.Name, bookLanguage, BookUse.Skillbook, GetSkillObject(bookToAdd.StringId));
                 DefaultBookTypes.Instance.AddObject(book);
             }
         }
