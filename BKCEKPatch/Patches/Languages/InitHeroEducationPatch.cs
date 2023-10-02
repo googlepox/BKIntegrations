@@ -1,12 +1,11 @@
 ﻿using BannerKings.Managers;
 using BannerKings.Managers.Education.Languages;
-using HarmonyLib;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 
 namespace BKCEKPatch.Patches.Languages
 {
-    [HarmonyPatch(typeof(EducationManager), "InitHeroEducation")]
+    //[HarmonyPatch(typeof(EducationManager), "InitHeroEducation")]
     internal class InitHeroEducationPatch
     {
         public static bool Prefix(ref EducationManager __instance, Hero hero, ref Dictionary<Language, float> startingLanguages)

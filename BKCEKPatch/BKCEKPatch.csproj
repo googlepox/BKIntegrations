@@ -13,6 +13,9 @@
     <Reference Include="BannerKings">
       <HintPath>..\..\..\..\..\..\..\..\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\BannerKings\bin\Win64_Shipping_Client\BannerKings.dll</HintPath>
     </Reference>
+    <Reference Include="BannerKings.CulturesExpanded">
+      <HintPath>..\..\..\..\..\..\..\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\BannerKings.CulturesExpanded\bin\Win64_Shipping_Client\BannerKings.CulturesExpanded.dll</HintPath>
+    </Reference>
     <Reference Include="CalradiaExpandedKingdoms">
       <HintPath>..\..\..\..\..\..\..\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\CalradiaExpandedKingdoms\bin\Win64_Shipping_Client\CalradiaExpandedKingdoms.dll</HintPath>
     </Reference>

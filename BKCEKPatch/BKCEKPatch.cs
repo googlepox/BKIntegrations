@@ -1,5 +1,6 @@
 ﻿using BannerKings;
 using BKCEKPatch.Languages;
+using BKCEKPatch.ShippingLanes;
 using HarmonyLib;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
@@ -18,6 +19,7 @@ namespace BKCEKPatch
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
             BannerKingsConfig.Instance.AddInitializer(DefaultLanguageTypesAddOn.Instance);
+            BannerKingsConfig.Instance.AddInitializer(ShippingLanesAddOn.Instance);
         }
     }
 }

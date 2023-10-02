@@ -1,15 +1,13 @@
-﻿using BannerKings.Managers.Institutions.Religions.Faiths.Vlandia;
-using HarmonyLib;
-using TaleWorlds.CampaignSystem;
+﻿using TaleWorlds.CampaignSystem;
 
 namespace BKCEKPatch.Patches.Faiths
 {
-    [HarmonyPatch(typeof(Osfeyd), "IsCultureNaturalFaith")]
-    internal class OsfeydPatch
+    //[HarmonyPatch(typeof(ImmortalFlame), "IsCultureNaturalFaith")]
+    internal class ImmortalFlamePatch
     {
         public static void Postfix(ref bool __result, CultureObject culture)
         {
-            if (culture.StringId == "rhodok" || culture.StringId == "vlandia")
+            if (culture.StringId == "ariorum" || culture.StringId == "republic" || culture.StringId == "empire")
             {
                 __result = true;
             }

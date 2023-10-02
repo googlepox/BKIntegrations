@@ -1,4 +1,7 @@
-﻿using BKWarlordPatch.Books;
+﻿using BannerKings.Managers.Education.Books;
+using BannerKings.Managers.Education.Languages;
+using BKWarlordPatch.Books;
+using System.Collections.Generic;
 using TaleWorlds.SaveSystem;
 
 namespace BKEducationPatch
@@ -12,6 +15,11 @@ namespace BKEducationPatch
         protected override void DefineClassTypes()
         {
             AddClassDefinition(typeof(DefaultBookTypesWarlord), 1);
+        }
+
+        protected override void DefineContainerDefinitions()
+        {
+            ConstructContainerDefinition(typeof(Dictionary<BookType, Language>));
         }
     }
 }

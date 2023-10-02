@@ -8,7 +8,7 @@ using TaleWorlds.CampaignSystem;
 
 namespace BKCEKPatch.Patches.Languages
 {
-    [HarmonyPatch(typeof(EducationManager), "CorrectPlayerEducation")]
+    //[HarmonyPatch(typeof(EducationManager), "CorrectPlayerEducation")]
     internal class CorrectPlayerEducationPatch
     {
         public static bool Prefix(ref EducationManager __instance)
@@ -21,7 +21,7 @@ namespace BKCEKPatch.Patches.Languages
             languages.Add(key, 1f);
             educationDict.Add(Hero.MainHero, new EducationData(Hero.MainHero, languages));
             AccessTools.Property(typeof(EducationManager), "Educations").SetValue(__instance, educationDict);
-            return false;
+            return true;
         }
     }
 }

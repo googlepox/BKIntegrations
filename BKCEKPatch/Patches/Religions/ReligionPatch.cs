@@ -1,21 +1,16 @@
-﻿using BannerKings.Managers.Institutions.Religions.Doctrines;
+﻿using BannerKings.Managers.Institutions.Religions;
 using BannerKings.Managers.Institutions.Religions.Faiths;
-using BannerKings.Managers.Institutions.Religions.Leaderships;
 using HarmonyLib;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Settlements;
 
 namespace BKCEKPatch.Patches.Religions
 {
-    [HarmonyPatch(typeof(BannerKings.Managers.Institutions.Religions.Religion), "Initialize")]
+    [HarmonyPatch(typeof(Religion), nameof(Religion.Initialize))]
     internal class ReligionPatch
     {
-        public static void Postfix(ref BannerKings.Managers.Institutions.Religions.Religion __instance, ref List<CultureObject> ___favoredCultures, Faith faith,
-          ReligiousLeadership leadership,
-          List<CultureObject> favoredCultures,
-          List<Doctrine> doctrines,
-          Settlement settlement)
+        public static void Postfix(ref Religion __instance, Faith faith,
+          List<CultureObject> favoredCultures)
         {
             List<CultureObject> newCultures;
             if (__instance.StringId == "asera")
@@ -32,7 +27,6 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("ariorum")
 
                 };
-                ___favoredCultures = newCultures;
             }
             else if (__instance.StringId == "amra")
             {
@@ -42,7 +36,6 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("paleician"),
                     BannerKings.Utils.Helpers.GetCulture("vagir")
                 };
-                ___favoredCultures = newCultures;
             }
             else if (__instance.StringId == "treelore")
             {
@@ -53,7 +46,6 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("vagir"),
                     BannerKings.Utils.Helpers.GetCulture("nordling")
                 };
-                ___favoredCultures = newCultures;
             }
             else if (__instance.StringId == "darusosian")
             {
@@ -63,7 +55,6 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("republic"),
                     BannerKings.Utils.Helpers.GetCulture("ariorum")
                 };
-                ___favoredCultures = newCultures;
             }
             else if (__instance.StringId == "canticles")
             {
@@ -85,7 +76,6 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("lyrion"),
                     BannerKings.Utils.Helpers.GetCulture("apolssalian")
                 };
-                ___favoredCultures = newCultures;
             }
             else if (__instance.StringId == "osfeyd")
             {
@@ -96,8 +86,68 @@ namespace BKCEKPatch.Patches.Religions
                     BannerKings.Utils.Helpers.GetCulture("rhodok"),
                     BannerKings.Utils.Helpers.GetCulture("paleician"),
                 };
-                ___favoredCultures = newCultures;
             }
+            else if (__instance.StringId == "sixWinds")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("khuzait"),
+                    BannerKings.Utils.Helpers.GetCulture("rebkhu"),
+                };
+            }
+            else if (__instance.StringId == "calradian")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("republic"),
+                    BannerKings.Utils.Helpers.GetCulture("ariorum"),
+                    BannerKings.Utils.Helpers.GetCulture("empire"),
+                };
+            }
+            else if (__instance.StringId == "immortalFlame")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("republic"),
+                    BannerKings.Utils.Helpers.GetCulture("ariorum"),
+                    BannerKings.Utils.Helpers.GetCulture("empire"),
+                };
+            }
+            else if (__instance.StringId == "legionaries")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("republic"),
+                    BannerKings.Utils.Helpers.GetCulture("ariorum"),
+                    BannerKings.Utils.Helpers.GetCulture("empire"),
+                };
+            }
+            else if (__instance.StringId == "junme")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("nordling"),
+                    BannerKings.Utils.Helpers.GetCulture("sturgia"),
+                    BannerKings.Utils.Helpers.GetCulture("vagir"),
+                    BannerKings.Utils.Helpers.GetCulture("nord")
+                };
+            }
+            else if (__instance.StringId == "rodovera")
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("sturgia"),
+                    BannerKings.Utils.Helpers.GetCulture("vagir"),
+                };
+            }
+            else
+            {
+                newCultures = new List<CultureObject>()
+                {
+                    BannerKings.Utils.Helpers.GetCulture("empire")
+                };
+            }
+            AccessTools.Property(typeof(Religion), "FavoredCultures").SetValue(__instance, newCultures);
         }
     }
 }
