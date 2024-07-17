@@ -12,7 +12,7 @@ namespace BKEducationPatch.Behaviors
 
         public override void SyncData(IDataStore dataStore)
         {
-            dataStore.SyncData("BookLanguages", ref DefaultBookTypesAddOn.bookTypeLanguages);
+            dataStore.SyncData("BKEducationBookLanguages", ref DefaultBookTypesAddOn.bookTypeLanguages);
         }
     }
 }

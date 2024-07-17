@@ -180,23 +180,12 @@ namespace BKWarlordPatch.Books
                 if (bookTypeLanguages != null && bookTypeLanguages.Count > 0 && bookTypeLanguages.ContainsKey(book))
                 {
                     bookLanguage = bookTypeLanguages[book];
-                    if (bookLanguage.StringId == "language_vakken")
-                    {
-                        bookLanguage = DefaultLanguages.Instance.Vlandic;
-                    }
                     bookTypeLanguages[book] = bookLanguage;
                 }
                 else
                 {
                     bookTypeLanguages = new Dictionary<BookType, Language>();
                     bookLanguage = GetRandLanguage();
-                    if (bookLanguage.StringId == "language_vakken")
-                    {
-                        while (bookLanguage.StringId == "language_vakken")
-                        {
-                            bookLanguage = GetRandLanguage();
-                        }
-                    }
                     bookTypeLanguages.Add(book, bookLanguage);
                 }
                 ItemObject bookToAdd = MBObjectManager.Instance.GetObject<ItemObject>(book.StringId);

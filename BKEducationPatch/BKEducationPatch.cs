@@ -1,6 +1,8 @@
 ﻿using BannerKings;
+using BKEducationPatch.Behaviors;
 using BKEducationPatch.Books;
 using HarmonyLib;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
@@ -17,6 +19,9 @@ namespace BKEducationPatch
         }
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
+            base.OnCampaignStart(game, gameStarterObject);
+            CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;
+            campaignGameStarter.AddBehavior(new EducationCampaignBehaviorAddon());
             BannerKingsConfig.Instance.AddInitializer(DefaultBookTypesAddOn.Instance);
         }
     }

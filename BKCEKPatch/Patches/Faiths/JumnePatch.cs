@@ -4,8 +4,8 @@ using TaleWorlds.CampaignSystem;
 
 namespace BKCEKPatch.Patches.Faiths
 {
-    [HarmonyPatch(typeof(Junme), nameof(Junme.IsCultureNaturalFaith))]
-    internal class JunmePatch
+    [HarmonyPatch(typeof(Jumne), nameof(Jumne.IsCultureNaturalFaith))]
+    internal class JumnePatch
     {
         public static void Postfix(ref bool __result, CultureObject culture)
         {

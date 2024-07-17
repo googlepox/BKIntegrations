@@ -12,7 +12,7 @@ namespace BKWarlordPatch.Behaviors
 
         public override void SyncData(IDataStore dataStore)
         {
-            dataStore.SyncData("BookLanguages", ref DefaultBookTypesWarlord.bookTypeLanguages);
+            dataStore.SyncData("BKWarlordBookLanguages", ref DefaultBookTypesWarlord.bookTypeLanguages);
         }
     }
 }
