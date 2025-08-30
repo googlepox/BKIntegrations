@@ -1,4 +1,5 @@
 ﻿using BannerKings;
+using BannerKings.Behaviours.Feasts;
 using BKWarlordPatch.Behaviors;
 using BKWarlordPatch.Books;
 using HarmonyLib;
@@ -11,7 +12,7 @@ namespace BKWarlordPatch
     public class BKWarlordPatch : MBSubModuleBase
     {
         public static readonly Harmony harmony = new Harmony("BKWarlordPatch");
-
+        public static BKFeastBehavior feastBehavior = null;
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();

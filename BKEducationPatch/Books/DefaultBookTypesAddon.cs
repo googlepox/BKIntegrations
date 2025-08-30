@@ -185,7 +185,7 @@ namespace BKEducationPatch.Books
             foreach (BookType book in All)
             {
                 Language bookLanguage;
-                if (bookTypeLanguages != null && bookTypeLanguages.Count > 0 && bookTypeLanguages.ContainsKey(book))
+                if (bookTypeLanguages?.Count > 0 && bookTypeLanguages.ContainsKey(book))
                 {
                     bookLanguage = bookTypeLanguages[book];
                     bookTypeLanguages[book] = bookLanguage;
