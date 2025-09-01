@@ -12,6 +12,9 @@
     <Reference Include="BannerKings">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\BannerKings\bin\Win64_Shipping_Client\BannerKings.dll</HintPath>
     </Reference>
+    <Reference Include="LT_Education">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\LT_Education\bin\Win64_Shipping_Client\LT_Education.dll</HintPath>
+    </Reference>
     <Reference Include="TaleWorlds.CampaignSystem">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
     </Reference>
@@ -42,10 +45,6 @@
     <Reference Include="TaleWorlds.SaveSystem">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.SaveSystem.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Patches\" />
   </ItemGroup>
 
 </Project>

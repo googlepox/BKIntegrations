@@ -2,6 +2,7 @@
 using BKEducationPatch.Behaviors;
 using BKEducationPatch.Books;
 using HarmonyLib;
+using LT_Education;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;

@@ -49,7 +49,22 @@ namespace BKROTPatch.Behaviors
 
         private void OnNewGameCreated(CampaignGameStarter starter)
         {
-            UpdateTitles();
+            bool isNewVersion = false;
+            foreach (Settlement settlement in Settlement.All)
+            {
+                if (settlement.StringId == "ROT_town31")
+                {
+                    isNewVersion = true;
+                }
+            }
+            if (isNewVersion)
+            {
+                BannerKingsConfig.Instance.TitlesGeneratorPath = BasePath.Name + "Modules/BKROTPatch/ModuleData/titles_6_3.xml";
+            }
+            else
+            {
+                BannerKingsConfig.Instance.TitlesGeneratorPath = BasePath.Name + "Modules/BKROTPatch/ModuleData/titles_6_2.xml";
+            }
         }
 
         private void UpdateTitles()
@@ -73,7 +88,14 @@ namespace BKROTPatch.Behaviors
             AccessTools.Field(typeof(TitleManager), "Titles")?.SetValue(BannerKingsConfig.Instance.TitleManager, new List<FeudalTitle>(Settlement.All.Count));
             AccessTools.Field(typeof(TitleManager), "Kingdoms")?.SetValue(BannerKingsConfig.Instance.TitleManager, new Dictionary<FeudalTitle, Kingdom>(Kingdom.All.Count));
             MethodBase methodBase = AccessTools.Method(typeof(BannerKings.Managers.Helpers.TitleGenerator), "InitializeTitles");
-            methodBase?.Invoke(this, new object[] { });
+            try
+            {
+                methodBase?.Invoke(this, new object[] { });
+            }
+            catch (Exception ex)
+            {
+
+            }
             BannerKingsConfig.Instance.TitleManager.RefreshCaches();
         }
 

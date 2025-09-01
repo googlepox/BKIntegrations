@@ -1,6 +1,8 @@
 ﻿using BannerKings;
 using BannerKings.Managers.Education.Books;
 using BannerKings.Managers.Education.Languages;
+using BannerKings.Managers.Education.Lifestyles;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.Core;
@@ -196,6 +198,7 @@ namespace BKEducationPatch.Books
                     bookTypeLanguages.Add(book, bookLanguage);
                 }
                 ItemObject bookToAdd = MBObjectManager.Instance.GetObject<ItemObject>(book.StringId);
+                AccessTools.Property(typeof(ItemObject), "Value").SetValue(bookToAdd, bookToAdd.Value / 100);
                 book.Initialize(bookToAdd, bookToAdd.Name, bookLanguage, BookUse.Skillbook, GetSkillObject(bookToAdd.StringId));
                 DefaultBookTypes.Instance.AddObject(book);
             }
