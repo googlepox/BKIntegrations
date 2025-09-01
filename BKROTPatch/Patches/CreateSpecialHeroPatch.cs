@@ -9,7 +9,7 @@ using TaleWorlds.CampaignSystem.Settlements;
 
 namespace BKROTPatch.Patches
 {
-    //[HarmonyPatch(typeof(HeroCreator), "CreateSpecialHero")]
+    [HarmonyPatch(typeof(HeroCreator), "CreateSpecialHero")]
     internal class CreateSpecialHeroPatch
     {
         public static bool Prefix(CharacterObject template, Settlement bornSettlement, Clan faction, Clan supporterOfClan, int age)

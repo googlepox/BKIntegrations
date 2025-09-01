@@ -34,7 +34,7 @@ namespace BKROTPatch.Behaviors
             CampaignEvents.RaidCompletedEvent.AddNonSerializedListener(this, new Action<BattleSideEnum, RaidEventComponent>(this.OnRaidCompleted));
             CampaignEvents.HeroCreated.AddNonSerializedListener(this, new Action<Hero, bool>(this.OnHeroCreated));
             CampaignEvents.OnNewGameCreatedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnNewGameCreated));
-            CampaignEvents.OnGameEarlyLoadedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnGameEarlyLoaded));
+            CampaignEvents.OnGameLoadedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnGameLoaded));
         }
 
         public override void SyncData(IDataStore dataStore)
@@ -42,30 +42,18 @@ namespace BKROTPatch.Behaviors
             
         }
 
-        private void OnGameEarlyLoaded(CampaignGameStarter starter)
+        private void OnGameLoaded(CampaignGameStarter starter)
         {
-            bool isNewVersion = false;
-            foreach (Settlement settlement in Settlement.All)
-            {
-                if (settlement.StringId == "ROT_town31")
-                {
-                    isNewVersion = true;
-                }
-            }
-            if (isNewVersion)
-            {
-                BannerKingsConfig.Instance.TitlesGeneratorPath = BasePath.Name + "Modules/BKROTPatch/ModuleData/titles_6_3.xml";
-            }
-            else
-            {
-                BannerKingsConfig.Instance.TitlesGeneratorPath = BasePath.Name + "Modules/BKROTPatch/ModuleData/titles_6_2.xml";
-            }
-            MethodBase methodBase = AccessTools.Method(typeof(TitleManager), "InitializeTitles");
-            methodBase.Invoke(BannerKingsConfig.Instance.TitleManager, new object[] { });
+            UpdateTitles();
         }
 
         private void OnNewGameCreated(CampaignGameStarter starter)
         {
+            UpdateTitles();
+        }
+
+        private void UpdateTitles()
+        {
             bool isNewVersion = false;
             foreach (Settlement settlement in Settlement.All)
             {
@@ -82,8 +70,11 @@ namespace BKROTPatch.Behaviors
             {
                 BannerKingsConfig.Instance.TitlesGeneratorPath = BasePath.Name + "Modules/BKROTPatch/ModuleData/titles_6_2.xml";
             }
-            MethodBase methodBase = AccessTools.Method(typeof(TitleManager), "InitializeTitles");
-            methodBase.Invoke(BannerKingsConfig.Instance.TitleManager, new object[] { });
+            AccessTools.Field(typeof(TitleManager), "Titles")?.SetValue(BannerKingsConfig.Instance.TitleManager, new List<FeudalTitle>(Settlement.All.Count));
+            AccessTools.Field(typeof(TitleManager), "Kingdoms")?.SetValue(BannerKingsConfig.Instance.TitleManager, new Dictionary<FeudalTitle, Kingdom>(Kingdom.All.Count));
+            MethodBase methodBase = AccessTools.Method(typeof(BannerKings.Managers.Helpers.TitleGenerator), "InitializeTitles");
+            methodBase?.Invoke(this, new object[] { });
+            BannerKingsConfig.Instance.TitleManager.RefreshCaches();
         }
 
         private void OnRaidCompleted(BattleSideEnum winnerSide, RaidEventComponent mapEvent)

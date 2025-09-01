@@ -12,7 +12,7 @@ namespace BKEducationPatch.Books
     internal class DefaultBookTypesAddOn : DefaultTypeInitializer<DefaultBookTypesAddOn, BookType>
     {
         [SaveableField(1)]
-        internal static Dictionary<BookType, Language> bookTypeLanguages;
+        internal static Dictionary<BookType, Language> bookTypeLanguages = new Dictionary<BookType, Language>();
         public BookType LTBook1 { get; private set; } = new BookType("education_book_onehanded1");
         public BookType LTBook2 { get; private set; } = new BookType("education_book_twohanded1");
         public BookType LTBook3 { get; private set; } = new BookType("education_book_polearm1");
@@ -192,7 +192,6 @@ namespace BKEducationPatch.Books
                 }
                 else
                 {
-                    bookTypeLanguages = new Dictionary<BookType, Language>();
                     bookLanguage = GetRandLanguage();
                     bookTypeLanguages.Add(book, bookLanguage);
                 }

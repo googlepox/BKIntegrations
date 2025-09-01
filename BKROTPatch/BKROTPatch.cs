@@ -13,6 +13,7 @@ using BKROTPatch.ShippingLanes;
 using BKROTPatch.Titles;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ComponentInterfaces;
@@ -34,6 +35,8 @@ namespace BKROTPatch
         {
             base.OnSubModuleLoad();
             harmony.PatchAll();
+            Type classType = AccessTools.TypeByName("ROTEnlistmentBehavior");
+            harmony.Patch(classType.Method("OnSessionLaunched"), finalizer: new HarmonyMethod(typeof(OnSessionLaunchedPatch).GetMethod("Finalizer")));
         }
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {
