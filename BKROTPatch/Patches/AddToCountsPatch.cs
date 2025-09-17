@@ -10,16 +10,24 @@ using TaleWorlds.Core;
 
 namespace BKROTPatch.Patches
 {
-    //[HarmonyPatch(typeof(ItemRoster), nameof(ItemRoster.AddToCounts), new Type[] { typeof(EquipmentElement), typeof(int) })]
+    [HarmonyPatch(typeof(ItemRosterElement), "set_Amount")]
     internal class AddToCountsPatch
     {
-        public static Exception Finalizer(Exception __exception, ItemRoster __instance, EquipmentElement rosterElement, int number)
+        public static void Prefix(ItemRosterElement __instance, ref int value)
+        {
+            if (value < 0)
+            {
+                value = 0;
+            }
+        }
+
+        /*public static Exception Finalizer(Exception __exception, ItemRoster __instance, EquipmentElement rosterElement, int number)
         {
             if (__exception != null && __exception is MBUnderFlowException)
             {
                 return null;
             }
             return __exception;
-        }
+        } */
     }
 }

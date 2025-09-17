@@ -37,6 +37,9 @@ namespace BKROTPatch
             harmony.PatchAll();
             Type classType = AccessTools.TypeByName("ROTEnlistmentBehavior");
             harmony.Patch(classType.Method("OnSessionLaunched"), finalizer: new HarmonyMethod(typeof(OnSessionLaunchedPatch).GetMethod("Finalizer")));
+
+            classType = AccessTools.TypeByName("ROTPartyWageModel");
+            //harmony.Patch(classType.Method("GetCharacterWage"), prefix: new HarmonyMethod(typeof(GetCharacterWagePatch).GetMethod("Prefix")));
         }
         protected override void OnGameStart(Game game, IGameStarter gameStarterObject)
         {

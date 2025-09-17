@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
 
 namespace BKROTPatch.Patches
@@ -19,6 +20,15 @@ namespace BKROTPatch.Patches
                 return false;
             }
             return true;
+        }
+
+        public static Exception Finalizer(Exception __exception, DefaultLogsCampaignBehavior __instance, PartyBase attackerParty, PartyBase defenderParty, object subject, bool showNotification)
+        {
+            if (__exception != null && __exception is NullReferenceException)
+            {
+                return null;
+            }
+            return __exception;
         }
     }
 }

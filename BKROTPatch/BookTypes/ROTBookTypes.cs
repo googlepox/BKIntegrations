@@ -33,7 +33,7 @@ namespace BKROTPatch.BookTypes
 
         public override void Initialize()
         {
-            this.SevenPointedStar.Initialize(DefaultTypeInitializer<BKROTItems, ItemObject>.Instance.BookSevenPointedStar, new TextObject("A sad story that reminds many of their powerlesness towards the ways of the world. The shepherd boy Kais and the nobleman's daughter Layala love each other, but they can never marry. The poem is Kais's lament as he wanders alone, unwilling to forget his true love, driving himself mad with longing. “The wind that blows the dry steppe dust...”", null), ROTLanguages.Instance.Westerosi, BookUse.Skillbook, BKSkills.Instance.Theology, DefaultTypeInitializer<BKTraits, TraitObject>.Instance.Humble);
+            this.SevenPointedStar.Initialize(DefaultTypeInitializer<BKROTItems, ItemObject>.Instance.BookSevenPointedStar, new TextObject("The Seven-Pointed Star is the holiest text of the Faith of the Seven, said to have been written by Septon Barth the First and inspired by the words of the Seven themselves. Within its pages are sermons, parables, and laws meant to guide the faithful in all walks of life. Each of the Seven speaks through it—the Father on justice, the Mother on mercy, the Warrior on strength, the Maiden on innocence, the Smith on labor, the Crone on wisdom, and the Stranger on death. No other book is so often read aloud in septs across Westeros, nor sworn upon in oaths of crown and commoner alike.", null), ROTLanguages.Instance.Westerosi, BookUse.Skillbook, BKSkills.Instance.Theology, DefaultTypeInitializer<BKTraits, TraitObject>.Instance.Humble);
             
             foreach (BookType book in All)
             {

@@ -9,9 +9,11 @@ using BKROTPatch.Divinities;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
@@ -35,11 +37,17 @@ namespace BKROTPatch.Behaviors
             CampaignEvents.HeroCreated.AddNonSerializedListener(this, new Action<Hero, bool>(this.OnHeroCreated));
             CampaignEvents.OnNewGameCreatedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnNewGameCreated));
             CampaignEvents.OnGameLoadedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.OnGameLoaded));
+            CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.OnDailyTick));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
             
+        }
+
+        private void OnDailyTick()
+        {
+            BannerKingsConfig.Instance.TitleManager.RefreshCaches();
         }
 
         private void OnGameLoaded(CampaignGameStarter starter)
@@ -94,7 +102,8 @@ namespace BKROTPatch.Behaviors
             }
             catch (Exception ex)
             {
-
+                File.AppendAllText(BKROTPatch.path + BKROTPatch.fileName, Environment.NewLine + ex.Message +
+                    Environment.NewLine + ex.StackTrace);
             }
             BannerKingsConfig.Instance.TitleManager.RefreshCaches();
         }
